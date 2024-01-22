@@ -46,15 +46,6 @@
                 </div>  
               </div>
                 
-              <div aria-label="Page navigation" class="row justify-content-center">
-                <div  class="col-auto btn-group">
-                  <button type="button" class="btn btn-light border" (click)="listarCreditos(1)" *ngIf='pagina_actual != 1'>Primera</button>
-                  <button type="button" class="btn btn-light border" (click)="listarCreditos(pagina_actual-1)" *ngIf='pagina_actual != 1'>{{pagina_actual-1}}</button>
-                  <button type="button" class="btn btn-primary active">{{pagina_actual}}</button>
-                  <button type="button" class="btn btn-light border" (click)="listarCreditos(pagina_actual+1)" *ngIf='pagina_actual != pagina_final'>{{pagina_actual+1}}</button>
-                  <button type="button" class="btn btn-light border" (click)="listarCreditos(pagina_final)" *ngIf='pagina_actual != pagina_final'>Ultima</button>
-                </div>
-              </div>
               <hr>
     
               <div class="row">
@@ -136,7 +127,12 @@
             </div>
 
             <div *ngIf="total_registros==0" class="container-no">
-              <span class="centrar">Actualmente no existen creditos registrados.</span>
+              <div class="centrar">
+                <span class="centrar">Actualmente no existen creditos registrados.</span>
+              </div>
+              <div class="centrar">
+                <span class="btn btn-primary active" data-bs-toggle="button" autocomplete="off" aria-pressed="true" (click)="abrirModal()">Solicitar credito</span>
+              </div>
             </div>
         </main>
     </body>

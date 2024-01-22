@@ -12,13 +12,13 @@
           <a class="nav-link" href="creditos">Créditos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="solicitudes">Solicitudes de Créditos</a>
+          <a class="nav-link" href="solicitudes">Solicitudes de créditos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="usuario_actual_perfil_id == 1">
           <a class="nav-link" href="usuarios">Usuarios</a>
         </li>
         <li class="nav-item">
-           <a class="nav-link" href="#" (click)="cerrarSesion()">Cerrar Sesion</a>
+           <a class="nav-link" href="#" (click)="cerrarSesion()">Cerrar sesión</a>
         </li>
       </ul>
     </div>

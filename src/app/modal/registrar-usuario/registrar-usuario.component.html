@@ -1,0 +1,57 @@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Nuevo usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registrar_usuario">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Rol:</label>
+            <select class="form-select" aria-label="Default select"  formControlName="rol_id">
+                <option *ngFor="let rol of roles" value="{{rol['id']}}">{{rol['nombre']}}</option>
+              </select>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="recipient-name" class="col-form-label">Nombre:</label>
+                    <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre">
+                </div>
+                <div class="col-md-6">
+                    <label for="recipient-name" class="col-form-label">Apellido:</label>
+                    <input class="form-control" type="text" placeholder="Nombre" formControlName="apellido">
+                </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Usuario:</label>
+            <input class="form-control" type="text" placeholder="Nombre" formControlName="usuario">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="inputPassword" formControlName="contrasenia">
+          </div>
+          
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Documento de identidad:</label>
+            <div class="input-group mb-3 row">
+                <div class="col-md-4">
+                    <select class="form-select" aria-label="Default select" formControlName="tipo_documento_id">
+                        <option *ngFor="let tipo of tipo_documento" value="{{tipo['id']}}">{{tipo['etiqueta']}}</option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="12345678" formControlName="numero_documento">
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarDatos()">Registrar usuario</button>
+      </div>
+    </div>
+  </div>

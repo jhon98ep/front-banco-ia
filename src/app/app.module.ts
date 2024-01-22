@@ -12,6 +12,11 @@ import { CreditosComponent } from './creditos/creditos.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { SolicitudesCreditosComponent } from './solicitudes-creditos/solicitudes-creditos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { CreditosVerComponent } from './creditos-ver/creditos-ver.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { RegistrarCreditoComponent } from './modal/registrar-credito/registrar-credito.component';
+import { RegistrarUsuarioComponent } from './modal/registrar-usuario/registrar-usuario.component';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +26,19 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     MenuSuperiorComponent,
     CreditosComponent,
     SolicitudesCreditosComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    CreditosVerComponent,
+    RegistrarCreditoComponent,
+    RegistrarUsuarioComponent,
+    RegistrarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     provideClientHydration(),

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ApiService } from '../Service/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { RegistrarCreditoComponent } from '../modal/registrar-credito/registrar-credito.component';
+
 
 @Component({
   selector: 'app-creditos',
@@ -9,10 +12,12 @@ import { FormBuilder } from '@angular/forms';
   styleUrl: './creditos.component.css'
 })
 export class CreditosComponent {
+  bsModalRef: BsModalRef | undefined;
   constructor(
     private router: Router,
     private apiService: ApiService,
     private formBuilder: FormBuilder,
+    private modalService: BsModalService    
   ) { }
 
   creditos = [];
@@ -41,6 +46,11 @@ export class CreditosComponent {
     }
     this.listarCreditos(1);
     this.listarNumeroCuotas();
+  }
+  
+  abrirModal(): void {
+    this.bsModalRef = this.modalService.show(RegistrarCreditoComponent);
+    this.bsModalRef.content.closeBtnName = 'Cerrar';
   }
 
   async listarCreditos(pagina: number){

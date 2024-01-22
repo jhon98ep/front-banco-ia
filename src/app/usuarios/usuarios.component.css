@@ -1,10 +1,11 @@
 .container-no{
     margin: auto;
-    display: inline-flex;
+    display: block;
     height: 20rem;
     width: 100%;
 }
 
 .centrar{
-    margin: auto;
+    margin-inline: auto;
+    text-align: center;
 }

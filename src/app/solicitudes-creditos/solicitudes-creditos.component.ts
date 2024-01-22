@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ApiService } from '../Service/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { ComunicacionService } from '../Service/comunicacion.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { RegistrarCreditoComponent } from '../modal/registrar-credito/registrar-credito.component';
 
 @Component({
   selector: 'app-solicitudes-creditos',
@@ -9,10 +12,13 @@ import { FormBuilder } from '@angular/forms';
   styleUrl: './solicitudes-creditos.component.css'
 })
 export class SolicitudesCreditosComponent {
+  bsModalRef: BsModalRef | undefined;
   constructor(
     private router: Router,
     private apiService: ApiService,
     private formBuilder: FormBuilder,
+    private comunicacionService: ComunicacionService,
+    private modalService: BsModalService
   ) { }
 
   solicitudes = [];
@@ -39,8 +45,16 @@ export class SolicitudesCreditosComponent {
     }else{
       this.router.navigateByUrl('/login')
     }
+    this.comunicacionService.solicitudAgregado$.subscribe(() => {
+      this.listarSolicitudesCreditos(1);
+    });
     this.listarSolicitudesCreditos(1);
     this.listarNumeroCuotas();
+  }
+
+  abrirModal(): void {
+    this.bsModalRef = this.modalService.show(RegistrarCreditoComponent);
+    this.bsModalRef.content.closeBtnName = 'Cerrar';
   }
 
   async listarSolicitudesCreditos(pagina: number){
