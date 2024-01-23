@@ -42,6 +42,9 @@ export class UsuariosComponent {
       this.usuario_actual = JSON.parse(this.usuario_actual);
       this.usuario_actual_id = this.usuario_actual.usuario_id;
       this.usuario_actual_perfil_id = this.usuario_actual.rol_id;
+      if(this.usuario_actual_perfil_id != 1){
+        this.router.navigateByUrl('/inicio')
+      }
     }else{
       this.router.navigateByUrl('/login')
     }
@@ -97,7 +100,14 @@ export class UsuariosComponent {
   }
 
   cambiarEstadoUsuario(id : string){
-    
+    let datos = {};
+    this.apiService.peticionPatch(datos, 'usuarios/'+id+'/activo').subscribe((resp: any) => {
+      if(resp.estado == true) {
+        this.listarUsuarios(1);
+      }else{
+          console.log(resp)
+      }
+    }); 
   }
 
   filtrarUsuarios(){
