@@ -6,6 +6,7 @@ import { CreditosComponent } from './creditos/creditos.component';
 import { SolicitudesCreditosComponent } from './solicitudes-creditos/solicitudes-creditos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'creditos', component: CreditosComponent },
   { path: 'solicitudes', component: SolicitudesCreditosComponent },
   { path: 'usuarios', component: UsuariosComponent },
+  { path: 'usuario/:id', component: UsuariosVerComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrarme', component: RegistrarComponent },
   { path: '#', redirectTo: '/login', pathMatch: 'full'},

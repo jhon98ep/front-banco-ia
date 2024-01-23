@@ -17,6 +17,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { RegistrarCreditoComponent } from './modal/registrar-credito/registrar-credito.component';
 import { RegistrarUsuarioComponent } from './modal/registrar-usuario/registrar-usuario.component';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RegistrarComponent } from './registrar/registrar.component';
     CreditosVerComponent,
     RegistrarCreditoComponent,
     RegistrarUsuarioComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    UsuariosVerComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ export class UsuariosComponent {
 
   usuario_actual : any;
   usuario_actual_id : number = 0;
-  usuario_actual_perfil_id : string = "";
+  usuario_actual_perfil_id : number = 0;
 
   filtros_busqueda_creditos = this.formBuilder.group({
     filtro_numero_cuotas: '',
@@ -56,10 +56,6 @@ export class UsuariosComponent {
   abrirModal(): void {
     this.bsModalRef = this.modalService.show(RegistrarUsuarioComponent);
     this.bsModalRef.content.closeBtnName = 'Cerrar';
-  }
-
-  onUsuarioAgregado() {
-    this.listarUsuarios(1);
   }
 
   async listarUsuarios(pagina: number){
@@ -97,6 +93,10 @@ export class UsuariosComponent {
   }
 
   verUsuario(id : string){
+    this.router.navigateByUrl('/usuario/'+id)
+  }
+
+  cambiarEstadoUsuario(id : string){
     
   }
 

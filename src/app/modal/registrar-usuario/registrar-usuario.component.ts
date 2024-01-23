@@ -22,9 +22,6 @@ export class RegistrarUsuarioComponent {
  
   roles = [];
   tipo_documento = [];
-  pagina_actual = 0;
-  pagina_final = 0;
-  total_registros = 0;
 
   usuario_actual : any;
   usuario_actual_id : number = 0;
