@@ -130,7 +130,7 @@
               <div class="centrar">
                 <span class="centrar">Actualmente no existen creditos registrados.</span>
               </div>
-              <div class="centrar">
+              <div *ngIf="usuario_actual_perfil_id == 2" class="centrar">
                 <span class="btn btn-primary active" data-bs-toggle="button" autocomplete="off" aria-pressed="true" (click)="abrirModal()">Solicitar credito</span>
               </div>
             </div>

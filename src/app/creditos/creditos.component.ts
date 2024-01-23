@@ -28,7 +28,7 @@ export class CreditosComponent {
 
   usuario_actual : any;
   usuario_actual_id : number = 0;
-  usuario_actual_token : string = "";
+  usuario_actual_perfil_id : number = 0;
 
   filtros_busqueda_creditos = this.formBuilder.group({
     filtro_numero_cuotas: '',
@@ -40,7 +40,7 @@ export class CreditosComponent {
       this.usuario_actual = localStorage.getItem('usuarioActual');
       this.usuario_actual = JSON.parse(this.usuario_actual);
       this.usuario_actual_id = this.usuario_actual.usuario_id;
-      this.usuario_actual_token = this.usuario_actual.token;
+      this.usuario_actual_perfil_id = this.usuario_actual.rol_id;
     }else{
       this.router.navigateByUrl('/login')
     }
@@ -54,11 +54,10 @@ export class CreditosComponent {
   }
 
   async listarCreditos(pagina: number){
-    let datos = {
-      "pagina" : pagina,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    this.apiService.peticionGet(datos, 'creditos').subscribe((resp: any) => {
+    let datos = {}
+    let endPoint = 'creditos?pagina='+pagina;
+    endPoint = this.usuario_actual_perfil_id == 2 ? endPoint+'&cliente_solicitante_id='+this.usuario_actual_id : endPoint;
+    this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
       this.creditos = [];
       if(resp.estado == true) {
           window.scrollTo(0, 0);
