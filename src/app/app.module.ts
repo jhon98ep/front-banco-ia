@@ -19,6 +19,13 @@ import { RegistrarComponent } from './registrar/registrar.component';
 import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
 import { SolicitudesVerComponent } from './solicitudes-ver/solicitudes-ver.component';
 
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsCO from '@angular/common/locales/es-CO';
+
+registerLocaleData(localeEsCO, 'es-CO');
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +51,7 @@ import { SolicitudesVerComponent } from './solicitudes-ver/solicitudes-ver.compo
   ],
   providers: [
     provideClientHydration(),
+    { provide: LOCALE_ID, useValue: 'es-CO' }
     //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

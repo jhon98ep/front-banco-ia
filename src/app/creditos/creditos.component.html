@@ -75,10 +75,10 @@
                                           {{credito['tipo_credito']['nombre']}}
                                         </td>
                                         <td>
-                                          {{credito['valor']}}
+                                          {{credito['valor']  | currency:'COP':'symbol':'1.0-0'}}
                                         </td>
                                         <td>
-                                          {{credito['valor_cuota']}}
+                                          {{credito['valor_cuota'] | currency:'COP':'symbol':'1.0-0'}}
                                         </td>
                                         <td class="text-center">
                                             <span class="label label-default">{{credito['fecha_aprobacion']}}</span>

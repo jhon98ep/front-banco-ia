@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="recipient-name" class="col-form-label">Valor:</label>
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.valor_solicitado}}">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.valor_solicitado | currency:'COP':'symbol':'1.0-0'}}">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="recipient-name" class="col-form-label">Tipo credito:</label>

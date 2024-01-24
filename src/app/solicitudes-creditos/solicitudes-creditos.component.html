@@ -80,7 +80,7 @@
                                         {{solicitud['tipo_credito']['nombre']}}
                                       </td>
                                       <td>
-                                        {{solicitud['valor_solicitado']}}
+                                        {{solicitud['valor_solicitado'] | currency:'COP':'symbol':'1.0-0'}}
                                       </td>
                                       <td class="text-center">
                                         <span class="label label-default">{{solicitud['estado']['etiqueta']}}</span>
