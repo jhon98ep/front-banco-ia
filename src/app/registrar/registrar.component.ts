@@ -25,6 +25,7 @@ export class RegistrarComponent {
 
   usuario_actual : any;
   usuario_actual_id : number = 0;
+  cargando = false;
 
   registrar_usuario = this.formBuilder.group({
     rol_id: 0,
@@ -41,9 +42,11 @@ export class RegistrarComponent {
   }
 
   registrarUsuario(): void {
+    this.cargando = true;
     let datos = this.registrar_usuario.value;
     this.apiService.peticionPost(datos, 'registrarme').subscribe((resp: any) => {
       if(resp.estado == true) {
+          this.cargando = false;
           this.iniciarSesion();          
       }else{
           console.log(resp)

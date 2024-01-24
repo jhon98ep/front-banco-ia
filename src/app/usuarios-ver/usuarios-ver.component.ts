@@ -30,6 +30,7 @@ export class UsuariosVerComponent {
   usuario_actual : any;
   usuario_actual_id : number = 0;
   usuario_actual_perfil_id : number = 0;
+  cargando = false;
 
   roles = [];
   tipo_documento = [];
@@ -59,10 +60,12 @@ export class UsuariosVerComponent {
   }
 
   obtenerUsuario(id: number){
+    this.cargando = true;
     let datos = {}
     this.apiService.peticionGet(datos, 'usuarios/'+id).subscribe((resp: any) => {
       if(resp.estado == true) {
         this.usuario_ver_informacion = resp.usuario; 
+        this.cargando = false;
       }
     })
   }
@@ -98,8 +101,7 @@ export class UsuariosVerComponent {
   }
 
   editarInformacion(){
-    this.editar = !this.editar;
-    
+    this.editar = !this.editar;   
     this.nombre = this.usuario_ver_informacion.nombre;
     this.apellido = this.usuario_ver_informacion.apellido;
     this.usuario = this.usuario_ver_informacion.usuario;
@@ -111,6 +113,7 @@ export class UsuariosVerComponent {
   }
 
   actualizarInformacion(){
+    this.cargando = true;
     let datos = this.editar_usuario.value;
     datos.nombre = this.nombre;
     datos.apellido = this.apellido;
@@ -120,6 +123,7 @@ export class UsuariosVerComponent {
     datos.tipo_documento_id = this.tipo_documento_id;
     this.apiService.peticionPatch(datos, 'usuarios/'+this.usuario_ver_id).subscribe((resp: any) => {
       if(resp.estado == true) {
+        this.cargando = false;
         this.router.navigateByUrl('/usuarios')
       }else{
           console.log(resp)

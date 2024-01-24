@@ -1,4 +1,6 @@
-
+<div *ngIf="cargando" class="overlay">
+  <div class="loader"></div>
+</div>
 <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,7 +41,5 @@
         <button type="button" class="btn btn-primary" (click)="guardarDatos()" [disabled]="!botonActivo" >Solicitar crédito</button>
       </div>
     </div>
-  </div>
-  <div *ngIf="cargando" class="overlay">
-    <div class="loader"></div>
-  </div>
+</div>
+  

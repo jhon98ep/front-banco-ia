@@ -24,6 +24,7 @@ export class SolicitudesVerComponent {
   usuario_actual : any;
   usuario_actual_id : number = 0;
   usuario_actual_perfil_id : number = 0;
+  cargando = false;
 
   observacion : string = "";
   estado_id = 0;
@@ -51,17 +52,20 @@ export class SolicitudesVerComponent {
   }
 
   obtenerSolicitud(id: number){
+    this.cargando = true;
     let datos = {}
     this.apiService.peticionGet(datos, 'solicitudCredito/'+id).subscribe((resp: any) => {
       if(resp.estado == true) {
         this.solicitud_ver_informacion = resp.solicitud; 
         this.estado_id = this.solicitud_ver_informacion.estado_id
         this.observacion = this.solicitud_ver_informacion.observaciones
+        this.cargando = false;
       }
     })
   }
 
   actualizarEstado(){
+    this.cargando = true;
     let estado = this.usuario_actual_perfil_id == 3 ? this.estado_id : 4;
     let datos = {
       estado_id : estado,
@@ -71,6 +75,7 @@ export class SolicitudesVerComponent {
     };
     this.apiService.peticionPatch(datos, 'solicitudCredito/'+this.solicitud_ver_id).subscribe((resp: any) => {
       if(resp.estado == true) {
+        this.cargando = false;
         this.router.navigateByUrl('/solicitudes')
       }else{
           console.log(resp)
@@ -83,10 +88,7 @@ export class SolicitudesVerComponent {
   }
 
   async listarEstados(pagina: number = -1){
-    let datos = {
-      "pagina" : pagina,
-      "usuario_id" : this.usuario_actual_id,
-    }
+    let datos = {}
     let endPoint = 'listaMaestra/1/opciones?pagina='+pagina;
     endPoint = this.usuario_actual_perfil_id == 4 ? endPoint+'&gerente='+1 : endPoint;
     endPoint = this.usuario_actual_perfil_id == 3 ? endPoint+'&asesor='+1 : endPoint;

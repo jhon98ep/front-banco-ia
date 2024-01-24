@@ -12,6 +12,9 @@
 </head>
 
 <body>
+    <div *ngIf="cargando" class="overlay">
+        <div class="loader"></div>
+    </div>
     <div class="container-fluid pt-5">
         <div class="row">
             <div class="col-md-5 col-lg-5 m-auto">

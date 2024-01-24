@@ -42,9 +42,6 @@ export class UsuariosComponent {
       this.usuario_actual = JSON.parse(this.usuario_actual);
       this.usuario_actual_id = this.usuario_actual.usuario_id;
       this.usuario_actual_perfil_id = this.usuario_actual.rol_id;
-      if(this.usuario_actual_perfil_id != 1){
-        this.router.navigateByUrl('/inicio')
-      }
     }else{
       this.router.navigateByUrl('/login')
     }
@@ -62,11 +59,10 @@ export class UsuariosComponent {
   }
 
   async listarUsuarios(pagina: number){
-    let datos = {
-      "pagina" : pagina,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    this.apiService.peticionGet(datos, 'usuarios').subscribe((resp: any) => {
+    let datos = {}
+    let endPoint = 'usuarios?pagina='+pagina;
+    endPoint = this.usuario_actual_perfil_id == 4 ? endPoint+'&gerente='+1 : endPoint;
+    this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
       this.usuarios = [];
       if(resp.estado == true) {
           window.scrollTo(0, 0);

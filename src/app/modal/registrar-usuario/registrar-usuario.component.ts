@@ -25,6 +25,8 @@ export class RegistrarUsuarioComponent {
 
   usuario_actual : any;
   usuario_actual_id : number = 0;
+  usuario_actual_perfil_id : number = 0;
+  cargando = false;
 
   registrar_usuario = this.formBuilder.group({
     rol_id: 0,
@@ -37,10 +39,12 @@ export class RegistrarUsuarioComponent {
   });
 
   guardarDatos(): void {
+    this.cargando = true;
     let datos = this.registrar_usuario.value;
     this.apiService.peticionPost(datos, 'usuarios').subscribe((resp: any) => {
       if(resp.estado == true) {
           this.comunicacionService.emitirUsuarioAgregado();
+          this.cargando = false;
           this.bsModalRef.hide();
       }else{
           console.log(resp)
@@ -53,6 +57,7 @@ export class RegistrarUsuarioComponent {
       this.usuario_actual = localStorage.getItem('usuarioActual');
       this.usuario_actual = JSON.parse(this.usuario_actual);
       this.usuario_actual_id = this.usuario_actual.id;
+      this.usuario_actual_perfil_id = this.usuario_actual.rol_id;
     }else{
       this.router.navigateByUrl('/login')
     }
@@ -61,11 +66,10 @@ export class RegistrarUsuarioComponent {
   }
 
   async listarRoles(pagina: number = -1){
-    let datos = {
-      "pagina" : pagina,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    this.apiService.peticionGet(datos, 'roles').subscribe((resp: any) => {
+    let datos = {}
+    let endPoint = 'roles?pagina='+pagina;
+    endPoint = this.usuario_actual_perfil_id == 4 ? endPoint+'&gerente='+1 : endPoint;
+    this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
       this.roles = [];
       if(resp.estado == true) {
           this.roles = resp.datos;
@@ -88,5 +92,9 @@ export class RegistrarUsuarioComponent {
           
       }
     });
+  }
+
+  cerrarModal(){
+    this.bsModalRef.hide();
   }
 }

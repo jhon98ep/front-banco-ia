@@ -1,9 +1,12 @@
 
+<div *ngIf="cargando" class="overlay">
+  <div class="loader"></div>
+</div>
 <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLabel">Nuevo usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" (click)="cerrarModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="registrar_usuario">
@@ -50,8 +53,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()"> Cerrar</button>
         <button type="button" class="btn btn-primary" (click)="guardarDatos()">Registrar usuario</button>
       </div>
     </div>
-  </div>
+</div>

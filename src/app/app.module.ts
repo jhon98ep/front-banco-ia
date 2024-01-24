@@ -12,7 +12,6 @@ import { CreditosComponent } from './creditos/creditos.component';
 //import { AuthInterceptor } from './auth.interceptor';
 import { SolicitudesCreditosComponent } from './solicitudes-creditos/solicitudes-creditos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { CreditosVerComponent } from './creditos-ver/creditos-ver.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { RegistrarCreditoComponent } from './modal/registrar-credito/registrar-credito.component';
 import { RegistrarUsuarioComponent } from './modal/registrar-usuario/registrar-usuario.component';
@@ -29,7 +28,6 @@ import { SolicitudesVerComponent } from './solicitudes-ver/solicitudes-ver.compo
     CreditosComponent,
     SolicitudesCreditosComponent,
     UsuariosComponent,
-    CreditosVerComponent,
     RegistrarCreditoComponent,
     RegistrarUsuarioComponent,
     RegistrarComponent,

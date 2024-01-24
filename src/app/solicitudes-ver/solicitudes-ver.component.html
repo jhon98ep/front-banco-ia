@@ -5,11 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <title>Inicio</title>
+  <title>Solicitud</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>
+    <div *ngIf="cargando" class="overlay">
+        <div class="loader"></div>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-5 col-lg-5 m-auto">
@@ -80,4 +83,5 @@
             </div>    
         </div>
     </div>
+    
 </body>
