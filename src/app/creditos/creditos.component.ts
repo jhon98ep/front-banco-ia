@@ -39,7 +39,7 @@ export class CreditosComponent {
     if(localStorage.getItem('usuarioLoggueado') == 'true'){
       this.usuario_actual = localStorage.getItem('usuarioActual');
       this.usuario_actual = JSON.parse(this.usuario_actual);
-      this.usuario_actual_id = this.usuario_actual.usuario_id;
+      this.usuario_actual_id = this.usuario_actual.id;
       this.usuario_actual_perfil_id = this.usuario_actual.rol_id;
     }else{
       this.router.navigateByUrl('/login')

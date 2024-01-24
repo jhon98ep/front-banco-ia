@@ -90,12 +90,12 @@
                                       </td>
                                       <td style="width: 20%;" class="text-center">
                                           
-                                              <span class="fa-stack table-link">
+                                              <span class="fa-stack table-link" (click)="verSolicitudCredito(solicitud['id'])">
                                                   <i class="fa fa-square fa-stack-2x"></i>
                                                   <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                               </span>
                                           
-                                              <span class="fa-stack table-link danger" (click)="verSolicitudCredito(solicitud['id'])">
+                                              <span class="fa-stack table-link danger" *ngIf="usuario_actual_perfil_id == 2 && solicitud['estado_id'] != 4" (click)="cancelarSolicitudCredito(solicitud['id'])">
                                                   <i class="fa fa-square fa-stack-2x"></i>
                                                   <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                               </span>

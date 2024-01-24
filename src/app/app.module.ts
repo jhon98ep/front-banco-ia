@@ -9,7 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './inicio/inicio.component';
 import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 import { CreditosComponent } from './creditos/creditos.component';
-import { AuthInterceptor } from './auth.interceptor';
+//import { AuthInterceptor } from './auth.interceptor';
 import { SolicitudesCreditosComponent } from './solicitudes-creditos/solicitudes-creditos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CreditosVerComponent } from './creditos-ver/creditos-ver.component';
@@ -18,6 +18,7 @@ import { RegistrarCreditoComponent } from './modal/registrar-credito/registrar-c
 import { RegistrarUsuarioComponent } from './modal/registrar-usuario/registrar-usuario.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
+import { SolicitudesVerComponent } from './solicitudes-ver/solicitudes-ver.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
     RegistrarCreditoComponent,
     RegistrarUsuarioComponent,
     RegistrarComponent,
-    UsuariosVerComponent
+    UsuariosVerComponent,
+    SolicitudesVerComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
   ],
   providers: [
     provideClientHydration(),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

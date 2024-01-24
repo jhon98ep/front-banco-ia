@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 col-lg-5 m-auto">
+                <div class="card">
+                    <h5 class="card-header">Solicitud de credito</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Cliente:</label>
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.cliente.nombre}} {{solicitud_ver_informacion.cliente.apellido}}">
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="recipient-name" class="col-form-label">Cuotas:</label>
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.cuotas.etiqueta}}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="recipient-name" class="col-form-label">Valor:</label>
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.valor_solicitado}}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="recipient-name" class="col-form-label">Tipo credito:</label>
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.tipo_credito.nombre}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Descripción:</label>
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.descripcion}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Observaciones:</label>
+                            <div *ngIf="usuario_actual_perfil_id != 3" class="col-md-4">
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.observaciones}}">
+                            </div>
+                            <div *ngIf="usuario_actual_perfil_id == 3" class="col-md-12">
+                                <textarea class="form-control" id="message-text"  [(ngModel)]="observacion"></textarea>
+                            </div>
+                        </div>
+                           
+                        <div class="mb-3 row">
+                            <div class="col-md-4">
+                                <label for="recipient-name" class="col-form-label">Estado:</label>
+                                <div *ngIf="!cambiar_estado">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.estado.etiqueta}}">
+                                </div>
+                                <div *ngIf="cambiar_estado">
+                                    <select class="form-select" [(ngModel)]="estado_id" name="estado_id">
+                                        <option *ngFor="let tipo of estados" value="{{tipo['id']}}">{{tipo['etiqueta']}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div *ngIf="(solicitud_ver_informacion.estado_id !=2 || solicitud_ver_informacion.estado_id !=4) && autorizado_cambiar" class="col-md-2 m-auto">
+                                <span class="fa-stack table-link" (click)="cambiarEstado()">
+                                    <i class="fa fa-square fa-stack-2x"></i>
+                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="recipient-name" class="col-form-label">Fecha solicitud:</label>
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{solicitud_ver_informacion.fecha_solicitud}}">
+                            </div>
+                        </div>
+                    </div>
+                    <span *ngIf="autorizado_cambiar" class="btn btn-primary" (click)="actualizarEstado()">Guardar cambios</span>
+                </div>
+                
+            </div>    
+        </div>
+    </div>
+</body>

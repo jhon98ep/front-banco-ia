@@ -56,26 +56,17 @@
                                 <thead>
                                     <tr>
                                         <th><span>Número de cuenta</span></th>
-                                        <th><span>Cliente solicitante</span></th>
-                                        <th><span>Aprobador</span></th>
-                                        <th><span># de cuotas</span></th>
+                                        <th><span>Número de cuotas</span></th>
                                         <th><span>Tipo de credito</span></th>
                                         <th><span>Valor credito</span></th>
                                         <th><span>Valor cuota</span></th>
                                         <th class="text-center"><span>Fecha Aprobación</span></th>
-                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="col " *ngFor="let credito of creditos">
                                         <td>
                                             <span class="user-subhead">{{credito['numero_cuenta']}} </span>
-                                        </td>
-                                        <td>
-                                            {{credito['cliente']['nombre']}}
-                                        </td>
-                                        <td>
-                                            {{credito['aprobador']['nombre']}}
                                         </td>
                                         <td>
                                           {{credito['cuotas']['etiqueta']}}
@@ -91,19 +82,6 @@
                                         </td>
                                         <td class="text-center">
                                             <span class="label label-default">{{credito['fecha_aprobacion']}}</span>
-                                        </td>
-                                        <td style="width: 20%;" class="text-center">
-                                            
-                                                <span class="fa-stack table-link">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            
-                                                <span class="fa-stack table-link danger" (click)="verCredito(credito['id'])">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            
                                         </td>
                                     </tr>
                                 </tbody>

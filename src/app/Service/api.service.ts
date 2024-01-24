@@ -10,27 +10,33 @@ import { end } from '@popperjs/core';
 export class ApiService {
 
   private url_api = environment.url;
+  private token_ls : any = localStorage.getItem('token');
+  private token = JSON.parse(this.token_ls);
+
 
   constructor(
     private httpClient: HttpClient,
   ) { }
 
   peticionPost(datos : any, endPoint : string){
-    return this.httpClient.post(this.url_api + endPoint, datos)
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.httpClient.post(this.url_api + endPoint, datos, { headers })
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   peticionGet(datos : any, endPoint : string){
-    return this.httpClient.get(this.url_api + endPoint)
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.httpClient.get(this.url_api + endPoint, { headers })
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   peticionPatch(datos : any, endPoint : string){
-    return this.httpClient.patch(this.url_api + endPoint, datos)
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.httpClient.patch(this.url_api + endPoint, datos, { headers })
     .pipe(
       catchError(this.errorHandler)
     )

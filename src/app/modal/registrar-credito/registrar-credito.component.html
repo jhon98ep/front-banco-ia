@@ -3,19 +3,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLabel">Nueva solicitud de crédito</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal-dialog" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="registrar_solicitud_creditos">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Número de cuotas:</label>
-            <select class="form-select" aria-label="Default select"  formControlName="cuotas_solicitadas_id">
+            <select class="form-select" aria-label="Default select"  formControlName="cuotas_solicitadas_id" required>
                 <option *ngFor="let cuota of cuotas" value="{{cuota['id']}}">{{cuota['etiqueta']}}</option>
               </select>
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Tipo de credito:</label>
-            <select class="form-select" aria-label="Default select " formControlName="tipo_credito_id">
+            <select class="form-select" aria-label="Default select " formControlName="tipo_credito_id" required>
                 <option *ngFor="let tipo of tipo_credito" value="{{tipo['id']}}">{{tipo['nombre']}}</option>
               </select>
           </div>
@@ -23,18 +23,23 @@
             <label for="recipient-name" class="col-form-label">Valor solicitado:</label>
             <div class="input-group mb-3">
                 <span class="input-group-text">COP $</span>
-                <input type="text" class="form-control" formControlName="valor_solicitado">
+                <input type="text" class="form-control" formControlName="valor_solicitado" required>
               </div>
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Descripción:</label>
-            <textarea class="form-control" id="message-text" formControlName="descripcion"></textarea>
+            <textarea class="form-control" id="message-text" formControlName="descripcion" required></textarea>
           </div>
         </form>
+        <label for="message-text" class="col-form-label">{{mensaje_ia}}</label>
       </div>
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="guardarDatos()">Solicitar</button>
+        <button type="button" class="btn btn-primary" (click)="calcularCuotaIA()">Calcular cuota</button>
+        <button type="button" class="btn btn-primary" (click)="guardarDatos()" [disabled]="!botonActivo" >Solicitar crédito</button>
       </div>
     </div>
+  </div>
+  <div *ngIf="cargando" class="overlay">
+    <div class="loader"></div>
   </div>

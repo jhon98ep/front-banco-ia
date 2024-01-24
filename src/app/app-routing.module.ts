@@ -7,12 +7,14 @@ import { SolicitudesCreditosComponent } from './solicitudes-creditos/solicitudes
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { UsuariosVerComponent } from './usuarios-ver/usuarios-ver.component';
+import { SolicitudesVerComponent } from './solicitudes-ver/solicitudes-ver.component';
 
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: 'creditos', component: CreditosComponent },
   { path: 'solicitudes', component: SolicitudesCreditosComponent },
+  { path: 'solicitud/:id', component: SolicitudesVerComponent },
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'usuario/:id', component: UsuariosVerComponent },
   { path: 'login', component: LoginComponent },

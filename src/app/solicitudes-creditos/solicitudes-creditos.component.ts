@@ -61,6 +61,7 @@ export class SolicitudesCreditosComponent {
     let datos = {}
     let endPoint = 'solicitudCredito?pagina='+pagina;
     endPoint = this.usuario_actual_perfil_id == 2 ? endPoint+'&cliente_solicitante_id='+this.usuario_actual_id : endPoint;
+    endPoint = this.usuario_actual_perfil_id == 4 ? endPoint+'&estado_id='+3: endPoint;
     this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
       this.solicitudes = [];
       if(resp.estado == true) {
@@ -91,7 +92,20 @@ export class SolicitudesCreditosComponent {
   }
 
   verSolicitudCredito(id : string){
-    
+    this.router.navigateByUrl('/solicitud/'+id)
+  }
+
+  cancelarSolicitudCredito(id : string){
+    let datos = {
+      estado_id : 5
+    };
+    this.apiService.peticionPatch(datos, '/solicitudCredito/'+id+'/estado').subscribe((resp: any) => {
+      if(resp.estado == true) {
+        this.listarSolicitudesCreditos(1);
+      }else{
+          console.log(resp)
+      }
+    }); 
   }
 
   filtrarSolicitudesCreditos(){

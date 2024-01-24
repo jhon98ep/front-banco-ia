@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+/* import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './Service/auth.service';
@@ -18,4 +18,4 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq);
   }
-}
+} */
