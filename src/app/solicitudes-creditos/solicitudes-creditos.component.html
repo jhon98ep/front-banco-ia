@@ -25,13 +25,16 @@
                           <div class="row g-3 mt-2 justify-content-center">
                             <form id="msform" [formGroup]="filtros_busqueda_creditos" class="row g-3 mt-2 justify-content-center">
                               <div class="col-md-4">
-                                <select formControlName="filtro_numero_cuotas" class="form-select" aria-label=".form-select-sm example">
-                                  <option value="" selected>Numero de cuotas</option>
-                                  <option *ngFor="let cuota of cuotas" value="{{cuota['id']}}">{{cuota['etiqueta']}}</option>
+                                <select formControlName="estado_id" class="form-select" aria-label=".form-select-sm example">
+                                  <option value="" selected>Estado</option>
+                                  <option *ngFor="let estado of estados" value="{{estado['id']}}">{{estado['etiqueta']}}</option>
                                 </select>
                               </div>
-                              <div class="col-md-6">
-                                <input formControlName="numero_cuenta" type="text" class="form-control" placeholder="Ingresa el numero de cuenta asociado al credito que deseas buscar">        
+                              <div class="col-md-4">
+                                <select formControlName="tipo_credito_id" class="form-select" aria-label=".form-select-sm example">
+                                  <option value="" selected>Tipo de crédito</option>
+                                  <option *ngFor="let tipo of tipos" value="{{tipo['id']}}">{{tipo['nombre']}}</option>
+                                </select>
                               </div>
                               <div class="col-md-2">
                                 <button (click)="filtrarSolicitudesCreditos()" class="btn btn-secondary btn-block">Buscar</button>             

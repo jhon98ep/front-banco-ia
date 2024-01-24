@@ -22,7 +22,7 @@ export class UsuariosComponent {
   ) { }
 
   usuarios = [];
-  cuotas = [];
+  roles = [];
   pagina_actual = 0;
   pagina_final = 0;
   total_registros = 0;
@@ -31,9 +31,9 @@ export class UsuariosComponent {
   usuario_actual_id : number = 0;
   usuario_actual_perfil_id : number = 0;
 
-  filtros_busqueda_creditos = this.formBuilder.group({
-    filtro_numero_cuotas: '',
-    numero_cuenta: '',
+  filtros_busqueda_usuarios= this.formBuilder.group({
+    rol_id: '',
+    nombre: '',
   });
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class UsuariosComponent {
       this.listarUsuarios(1);
     });
     this.listarUsuarios(1);
-    this.listarNumeroCuotas();
+    this.listarRoles();
 
   }
 
@@ -76,20 +76,20 @@ export class UsuariosComponent {
     });
   }
 
-  async listarNumeroCuotas(pagina: number = -1){
-    let datos = {
-      "pagina" : pagina,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    this.apiService.peticionGet(datos, 'listaMaestra/3/opciones').subscribe((resp: any) => {
-      this.cuotas = [];
+  async listarRoles(pagina: number = -1){
+    let datos = {}
+    let endPoint = 'roles?pagina='+pagina;
+    endPoint = this.usuario_actual_perfil_id == 4 ? endPoint+'&gerente='+1 : endPoint;
+    this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
+      this.roles = [];
       if(resp.estado == true) {
-          this.cuotas = resp.datos;
+          this.roles = resp.datos;
       }else{
           
       }
     });
   }
+
 
   verUsuario(id : string){
     this.router.navigateByUrl('/usuario/'+id)
@@ -107,21 +107,23 @@ export class UsuariosComponent {
   }
 
   filtrarUsuarios(){
-    let datos = {
-      "pagina" : -1,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    let datos_unidos = {...datos, ...this.filtros_busqueda_creditos.value}
-    this.apiService.peticionGet(datos_unidos, 'usuarios').subscribe((resp: any) => {
+    let datos = {}
+    let filtros = this.filtros_busqueda_usuarios.value;
+    let endPoint = 'usuarios?pagina=-1';
+    endPoint = this.usuario_actual_perfil_id == 4 ? endPoint+'&gerente='+1 : endPoint;
+    endPoint = filtros.rol_id != '' ? endPoint+'&rol_id='+filtros.rol_id : endPoint;
+    endPoint = filtros.nombre != '' ?  endPoint+'&nombre='+filtros.nombre: endPoint;
+    this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
       this.usuarios = [];
-      if(resp.resultado =! 'valido') {
-      }else{
+      if(resp.estado == true) {
           window.scrollTo(0, 0);
           this.total_registros = resp.total_registros;
           this.pagina_actual = resp.pagina_actual;
           this.pagina_final = resp.total_paginas;
           this.usuarios = resp.datos;
+      }else{
+          
       }
-    })
+    });
   }
 }

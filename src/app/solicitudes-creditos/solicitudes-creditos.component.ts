@@ -22,7 +22,8 @@ export class SolicitudesCreditosComponent {
   ) { }
 
   solicitudes = [];
-  cuotas = [];
+  estados = [];
+  tipos = [];
   pagina_actual = 0;
   pagina_final = 0;
   total_registros = 0;
@@ -32,8 +33,8 @@ export class SolicitudesCreditosComponent {
   usuario_actual_perfil_id : number = 0;
 
   filtros_busqueda_creditos = this.formBuilder.group({
-    filtro_numero_cuotas: '',
-    numero_cuenta: '',
+    estado_id: '',
+    tipo_credito_id: '',
   });
 
   ngOnInit(): void {
@@ -49,7 +50,8 @@ export class SolicitudesCreditosComponent {
       this.listarSolicitudesCreditos(1);
     });
     this.listarSolicitudesCreditos(1);
-    this.listarNumeroCuotas();
+    this.listarEstados();
+    this.listarTipos();
   }
 
   abrirModal(): void {
@@ -70,21 +72,28 @@ export class SolicitudesCreditosComponent {
           this.pagina_actual = resp.pagina_actual;
           this.pagina_final = resp.total_paginas;
           this.solicitudes = resp.datos;
+      }
+    });
+  }
+
+  async listarEstados(pagina: number = -1){
+    let datos = {}
+    this.apiService.peticionGet(datos, 'listaMaestra/1/opciones').subscribe((resp: any) => {
+      this.estados = [];
+      if(resp.estado == true) {
+          this.estados = resp.datos;
       }else{
           
       }
     });
   }
 
-  async listarNumeroCuotas(pagina: number = -1){
-    let datos = {
-      "pagina" : pagina,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    this.apiService.peticionGet(datos, 'listaMaestra/3/opciones').subscribe((resp: any) => {
-      this.cuotas = [];
+  async listarTipos(pagina: number = -1){
+    let datos = {}
+    this.apiService.peticionGet(datos, 'tipoCredito').subscribe((resp: any) => {
+      this.tipos = [];
       if(resp.estado == true) {
-          this.cuotas = resp.datos;
+          this.tipos = resp.datos;
       }else{
           
       }
@@ -109,15 +118,14 @@ export class SolicitudesCreditosComponent {
   }
 
   filtrarSolicitudesCreditos(){
-    let datos = {
-      "pagina" : -1,
-      "usuario_id" : this.usuario_actual_id,
-    }
-    let datos_unidos = {...datos, ...this.filtros_busqueda_creditos.value}
-    this.apiService.peticionGet(datos_unidos, 'creditos').subscribe((resp: any) => {
+    let datos = {}
+    let filtros = this.filtros_busqueda_creditos.value;
+    let endPoint = 'solicitudCredito?pagina=-1';
+    endPoint = filtros.estado_id != '' ? endPoint+'&estado_id='+filtros.estado_id : endPoint;
+    endPoint = filtros.tipo_credito_id != '' ?  endPoint+'&tipo_credito_id='+filtros.tipo_credito_id: endPoint;
+    this.apiService.peticionGet(datos, endPoint).subscribe((resp: any) => {
       this.solicitudes = [];
-      if(resp.resultado =! 'valido') {
-      }else{
+      if(resp.estado == true) {
           window.scrollTo(0, 0);
           this.total_registros = resp.total_registros;
           this.pagina_actual = resp.pagina_actual;

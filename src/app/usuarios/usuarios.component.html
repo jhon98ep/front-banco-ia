@@ -24,15 +24,15 @@
                         <div class="card card-body">
                           <div class="row">
                             <div class="row g-3 mt-2 justify-content-center">
-                              <form id="msform" [formGroup]="filtros_busqueda_creditos" class="row g-3 mt-2 justify-content-center">
-                                <div class="col-md-4">
-                                  <select formControlName="filtro_numero_cuotas" class="form-select" aria-label=".form-select-sm example">
-                                    <option value="" selected>Numero de cuotas</option>
-                                    <option *ngFor="let cuota of cuotas" value="{{cuota['id']}}">{{cuota['etiqueta']}}</option>
+                              <form id="msform" [formGroup]="filtros_busqueda_usuarios" class="row g-3 mt-2 justify-content-center">
+                                <div class="col-md-3" *ngIf="usuario_actual_perfil_id == 1">
+                                  <select formControlName="rol_id" class="form-select" aria-label=".form-select-sm example">
+                                    <option value="" selected>Rol</option>
+                                    <option *ngFor="let rol of roles" value="{{rol['id']}}">{{rol['nombre']}}</option>
                                   </select>
                                 </div>
-                                <div class="col-md-6">
-                                  <input formControlName="numero_cuenta" type="text" class="form-control" placeholder="Ingresa el numero de cuenta asociado al credito que deseas buscar">        
+                                <div class="col-md-5">
+                                  <input formControlName="nombre" type="text" class="form-control" placeholder="Ingresa el nombre, usuario o documento que desea buscar">        
                                 </div>
                                 <div class="col-md-2">
                                   <button (click)="filtrarUsuarios()" class="btn btn-secondary btn-block">Buscar</button>             
